@@ -28,3 +28,5 @@
 <div class="container" style="width:60%; margin:auto;">
 <h2>Welcome</h2>
 
+<?php  $link_storage = 'uploads/';?>
+

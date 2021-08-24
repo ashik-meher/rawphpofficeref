@@ -12,6 +12,7 @@ $sqlFind = "select * from users where id='$id' ";
 $op = $conn->query($sqlFind);
 
 $data = mysqli_fetch_object($op);
+//var_dump($data);
 
 if (isset($_POST['update'])){
 

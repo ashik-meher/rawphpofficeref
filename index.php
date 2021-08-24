@@ -141,6 +141,7 @@
         <th>Name</th>
         <th>Email Address</th>
         <th>Date of Birth</th>
+        <td>Image</td>
 
       </tr>
     </thead>
@@ -220,10 +221,11 @@
         <td><?=$dataObj->name;?></td>
         <td><?=$dataObj->email;?></td>
         <td><?=$dataObj->dob;?></td>
+        <td><img style="width:200px;height:150px;" src="<?=$link_storage.$dataObj->document;?>"alt="N/A">
 
-        <td><a href="controllers/edit.php?id=<?=$data->id;?>">Edit</a></td>
+        <td><a href="controllers/edit.php?id=<?=$dataObj->id;?>">Edit</a></td>
 
-        <td><a href="controllers/delete.php?id=<?=$data->id;?>">Delete</a></td>
+        <td><a href="controllers/delete.php?id=<?=$dataObj->id;?>">Delete</a></td>
       </tr>
 
 
