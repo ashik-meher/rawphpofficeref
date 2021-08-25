@@ -51,15 +51,22 @@
     
     <button id="add" name="add" class="btn btn-secondary">Add More Fields</button>
 
-    --------------------------------------------------------------------------------------------------
+    
+<br><span>________________________________________________________________________________________________</span>
 
     <div class="ajax">
+
+      <form action="search.php" method="POST">
       <span>Search</span>
-      <input type="text" id="search-field" name="search-field" placeholder="Enter a Name">
+      <input type="text" id="search_field" name="search_field" placeholder="Enter a Name">
+
+      <input type="submit" name="search" class="btn btn-danger">
+      </form>
     </div>
 
-
-    <div id="result">
+    <h1>Search Result Appear Here</h1>
+    <div id="result" style="border:2px solid red; padding:5px;">
+   
 
     </div>
 
@@ -91,20 +98,21 @@
 
       $(document).ready(function(){
         console.log("ok");
-        $('#search-field').keyup(function(){
+        $('#search_field').keyup(function(){
           var str = $(this).val();
+          //console.log(str);
 
           if (str != ''){
 
-            //funny// $('#result').append(str);
+            //funny behavior append with existing content :) // $('#result').append(str);
 
             $.ajax({
               url:"search.php",
-              method:"POST",
-              data:{search:str},
-              dataType:"txt",
+              method:"post",
+              data:{search_field:str},
+              dataType:"html",
               success: function(data){
-                $('$result').html(data)
+                $('#result').html(data)
 
               }
             })
@@ -122,7 +130,7 @@
       </script>
 
 
--------------------------------------------------------------------------------------------------------
+<br><span>________________________________________________________________________________________________</span>
     
 
 

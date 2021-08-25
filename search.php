@@ -1,4 +1,4 @@
-<?php include 'layouts/header.php'; ?>
+<?php// include 'layouts/header.php'; ?>
 
 
 
@@ -95,10 +95,13 @@
   
   require_once 'db/config.php';
 
-  if (isset($_POST['search-field'])){
-      $param = $_POST['search-field'];
+  
+      $param = $_POST['search_field'];
 
-      $sqlSearch = "select * from users where name like '%'.'$param'. '%'     ";
+      $sqlSearch = "select * from users where `name` like '%$param%' ";
+      //***** Remember not valid:  where name like '%'.'$param'. '%'     ";
+
+      var_dump($param);
 
       $op = $conn->query($sqlSearch);
 
@@ -107,13 +110,17 @@
 
       if(mysqli_num_rows($op) > 0){
 
-        $output .=    '<tr>
+        $output .=    '<table class="table"><thead>
+                      <tr>
                         <th>SL</th>
                         <th>Name</th>
                         <th>Email Address</th>
                         <th>Date of Birth</th>
+                        <th></th>
+                        <th></th>
+                        
 
-                     </tr>';
+                     </tr><thead><tbody>';
 
         while($row = mysqli_fetch_array($op)){
 
@@ -131,6 +138,7 @@
 
 
         }
+        $output .='</tbody></table>';
 
         echo $output;
 
@@ -139,7 +147,7 @@
         echo "Not Found any data";
       };
 
-    }
+    
 
 
 ?>
@@ -147,4 +155,4 @@
    
 
 
-<?php include_once 'layouts/footer.php'; ?>
+<?php // include_once 'layouts/footer.php'; ?>
