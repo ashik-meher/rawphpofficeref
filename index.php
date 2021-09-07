@@ -6,6 +6,11 @@
 
 <?php
 
+if(isset($_SESSION['user_name'])){
+  header('location: pindex.php');
+}
+
+
 if(isset($_SESSION['msg'])){
   echo '<p class="middle s-msg">'.$_SESSION['msg']. '</p>';
 

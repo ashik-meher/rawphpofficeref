@@ -6,6 +6,11 @@
 
 require '../db/config.php';
 
+
+$storage_dir = '../uploads/'; // for store files
+$link_storage = 'uploads/'; //for view
+
+
 if(isset($_POST['register'])){
 
 
@@ -29,12 +34,15 @@ if(isset($_POST['register'])){
 
     $check_op = $conn->query($sqlEmailIndex);
 
-    $emailCheck = mysqli_fetch_assoc($check_op);
+    $emailCheck = mysqli_num_rows($check_op);
     var_dump($emailCheck);
 
-    if(mysqli_num_rows($emailCheck)>0){
+    if(mysqli_num_rows($check_op)>0){
+        session_unset();
         $_SESSION['msg'] = 'We have a account associated with this email address, please chosse another email for registration';
         header('location: ../index.php');
+        
+        
     }
 
 
@@ -116,46 +124,50 @@ if(isset($_POST['register'])){
 
     //initialization of strorage dir
 
-    $storage_dir = '../uploads/'; // for store files
-    $link_storage = 'uploads/'; //for view
+    else{
 
-
+        
     if($password == $password_confirm){
 
      
         
    
 
-            //$path_db = $storage_dir. basename($document['name'][$count]); // creates conflict when showing files in browser
+        //$path_db = $storage_dir. basename($document['name'][$count]); // creates conflict when showing files in browser
 
-            //$path_db =  basename($document['name'][$count]); // without unique flag for a file image(timestamp)
+        //$path_db =  basename($document['name'][$count]); // without unique flag for a file image(timestamp)
 
-            //with timestamp + $count to generate unique value to avoid ambiguity
+        //with timestamp + $count to generate unique value to avoid ambiguity
 
-            $path_db = time().'_'.basename($document['name']);
+        $path_db = time().'_'.basename($document['name']);
 
-           
+       
 
 
-            $sql = "insert into users (name, email, dob, password, document) values ('$name', '$email', '$dob', '$password', '$path_db' )";
-            $result = $conn->query($sql);
+        $sql = "insert into users (name, email, dob, password, document) values ('$name', '$email', '$dob', '$password', '$path_db' )";
+        $result = $conn->query($sql);
 
-             // destination must be set correctly with 
+         // destination must be set correctly with 
 
-             $up_pro = move_uploaded_file($document['tmp_name'], $storage_dir.$path_db);
+         $up_pro = move_uploaded_file($document['tmp_name'], $storage_dir.$path_db);
 
-             if ($up_pro){
-                 echo " profile pic upload successful ". '<br>';
-             }
-             else {
-                 echo "Not Successful upload  ". '<br>';
-             }
- 
-    
-        }
+         if ($up_pro){
+             echo " profile pic upload successful ". '<br>';
+         }
+         else {
+             echo "Not Successful upload  ". '<br>';
+         }
+
+
+    }
+
+    }
+
+
 
 
         if ($result){
+            session_unset();// need to unset before you start a new session for a new registered user
             $_SESSION['register_success'] = 'You have been registered successfully!';
             header("location: ../index.php");
             

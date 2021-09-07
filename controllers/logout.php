@@ -2,7 +2,7 @@
 error_reporting(0);
 require_once('../layouts/header.php');
 
-echo '<div class="middle">Sad to see you leave  '. 'MR.'. $_SESSION['user_name']. '<br>';
+echo '<div class="middle">Sad to see you leave  '. 'MR. '. $_SESSION['user_name']. '<br>';
 echo 'Please Come Again!<br>';
 echo '<a href="../index.php">Login</a></div>';
 

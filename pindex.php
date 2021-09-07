@@ -17,6 +17,14 @@
 };
 ?>
 
+<?php   
+if (isset($_SESSION['login_success']))
+{
+  echo $_SESSION['login_success'];
+
+}
+?>
+
 
 
 

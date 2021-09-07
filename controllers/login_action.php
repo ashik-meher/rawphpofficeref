@@ -36,6 +36,7 @@ if(isset($_POST['login']))
     if($op){
         $row_count = mysqli_num_rows($op);
         if($row_count == 1){
+            var_dump($user);
         $user = mysqli_fetch_assoc($op);
          
             //echo 'Name: '. $user['name'].'<br>';
@@ -43,7 +44,8 @@ if(isset($_POST['login']))
             //set_time_limit(5);
               
             $_SESSION['user_name'] = $user['name'];
-            var_dump($_SESSION['user_name']);
+            //var_dump($_SESSION['user_name']);
+            $_SESSION['login_success'] = 'You , MR. '.$user['name'].' Logged In Succefully';
             header('location: ../pindex.php');
           
         }
@@ -52,7 +54,7 @@ if(isset($_POST['login']))
             echo "You are not a registedred user";
         }
         else {
-            echo "You are trapped as a duplicated user, we blocked your account for security purpose";
+            echo "You are trapped as a duplicated user, where email and password same ! we blocked your account for security purpose";
         }
     
      
