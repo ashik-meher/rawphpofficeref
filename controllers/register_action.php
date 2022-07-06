@@ -144,8 +144,17 @@ if(isset($_POST['register'])){
        
 
 
-        $sql = "insert into users (name, email, dob, password, document) values ('$name', '$email', '$dob', '$password', '$path_db' )";
-        $result = $conn->query($sql);
+        //$sql = "insert into users (name, email, dob, password, document) values ('$name', '$email', '$dob', '$password', '$path_db' )";
+        // $result = $conn->query($sql);
+
+        $sql = "insert into users (name, email, dob, password, document) values (?, ?, ?, ?, ? )";
+
+        $stmt = $conn->prepare($sql);
+
+        $stmt->bind_param('sssss', $name, $email, $dob, $password, $path_db);
+
+        $result = $stmt->execute();
+       
 
          // destination must be set correctly with 
 
